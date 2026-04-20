@@ -3,7 +3,7 @@ const comentarios = [
     autor: "María Gómez",
     email: "maria@email.com",
     fecha: "17/03/2026",
-    hora: "09:15",
+    hora: "12:15",
     texto: "Me parece una buena iniciativa para que los vecinos estemos informados de todo lo que ocurre en el municipio."
   },
   {
@@ -17,7 +17,7 @@ const comentarios = [
     autor: "Lucía Fernández",
     email: "lucia@email.com",
     fecha: "17/03/2026",
-    hora: "12:03",
+    hora: "08:03",
     texto: "He asistido al último evento cultural y estuvo muy bien organizado. Ojalá se repita pronto."
   }
 ];
