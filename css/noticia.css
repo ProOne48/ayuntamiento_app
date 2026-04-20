@@ -146,12 +146,29 @@
     text-align: center;
 }
 
-.link-social {
+.link-social-container {
     background: white;
     color: blue;
     padding: 0.5rem;
     border-radius: 0.8rem;
     border: 0.8px solid blue;
+}
+
+.link-social-container:hover {
+    background: lightblue;
+    color: white;
+}
+
+.link-social-container:hover .link-social {
+    text-decoration: none;
+    color: inherit;
+    font-size: 13.33px;
+}
+
+.link-social {
+    text-decoration: none;
+    color: blue;
+    font-size: 13.33px;
 }
 
 .pie-enlaces a {
