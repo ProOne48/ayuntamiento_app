@@ -118,9 +118,21 @@
     overflow: hidden;
 }
 
+.noticia-titulo {
+    align-items: center;
+    justify-content: center;
+
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
 .contenedor-social {
     display: flex;
-    gap: 1.5rem;
+    gap: 1vw;
+    align-items: flex-start;
 }
 
 /* Footer */
@@ -152,6 +164,7 @@
     padding: 0.5rem;
     border-radius: 0.8rem;
     border: 0.8px solid blue;
+    height: fit-content;
 }
 
 .link-social-container:hover {

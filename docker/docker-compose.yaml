@@ -1,0 +1,47 @@
+services:
+  web:
+    build: 
+      context: ..
+      dockerfile: docker/dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ../views:/var/www/html/views
+      - ../css:/var/www/html/css
+      - ../js:/var/www/html/js
+      - ../img:/var/www/html/img
+      - ../php:/var/www/html/php
+    env_file: ../.env
+    networks:
+      - sibw_ayuntamiento
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: ayuntamiento_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ayuntamiento
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password
+    networks:
+      - sibw_ayuntamiento
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: usuario
+      PMA_PASSWORD: password
+    depends_on:
+      - db
+    networks:
+      - sibw_ayuntamiento
+
+
+networks:
+  sibw_ayuntamiento:
+    driver: bridge

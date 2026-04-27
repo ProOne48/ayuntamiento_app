@@ -1,104 +1,81 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/noticia.css"/>
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portada - Noticias</title>
-</head>
-<body>
+{% extends 'main.html' %}
 
-  <!-- Zona invisible para abrir el panel -->
-  <div class="zona-hover-comentarios" id="zonaHover"></div>
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../../css/noticia.css"/>
+    <link rel="stylesheet" href="../../../css/styles.css"/>
+{% endblock %}
 
-  <!-- Panel lateral -->
-  <aside class="panel-comentarios" id="panelComentarios">
-    <div class="panel-header">
-      <h2>Comentarios del municipio</h2>
-      <button class="cerrar-panel" id="cerrarPanel">Cerrar</button>
-    </div>
+{% block title %}
+    <title>{{title}} - Ayuntamiento de Granada</title>
+{% endblock %}
 
-    <div class="panel-contenido">
-      <div class="barra-superior-comentarios">
-        <div class="contador" id="contadorComentarios">Comentarios (0)</div>
-        <button class="btn-nuevo" id="btnNuevoComentario">Comentario nuevo</button>
-      </div>
+{% block logo %}
+    <img class="logo" alt="Logo del Ayuntamiento de Granada" src="../../../img/logo.png"/>
+{% endblock %}
 
-      <div class="formulario-comentario" id="formularioComentario">
-        <h3>Nuevo comentario</h3>
+{% block comments %}
 
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" />
+<!-- Zona invisible para abrir el panel -->
+<div class="zona-hover-comentarios" id="zonaHover"></div>
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" />
-
-        <label for="textoComentario">Texto del comentario</label>
-        <textarea id="textoComentario"></textarea>
-
-        <div class="fila-botones">
-          <button class="btn-enviar" id="enviarComentario">Enviar</button>
-          <button class="cerrar-formulario" id="cerrarFormulario">Cancelar</button>
-        </div>
-      </div>
-
-      <div class="lista-comentarios" id="listaComentarios"></div>
-    </div>
-  </aside>
-
-  <div class="contenedor">
-    <header class="cabecera">
-      <img class="logo" alt="Logo del Ayuntamiento de Granada" src="../img/logo.png"/>
-      <div class="nombre-sitio">Ayuntamiento de Granada</div>
-      <nav class="enlaces-superiores">
-        <ul>
-          <li><a href="#">Enlace 1</a></li>
-          <li><a href="#">Enlace 2</a></li>
-          <li><a href="#">Enlace 3</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main class="principal">
-      <aside class="menu-lateral">
-        <ul>
-          <li><a href="#">menu1</a></li>
-          <li><a href="#">menu2</a></li>
-          <li><a href="#">menu3</a></li>
-        </ul>
-      </aside>
-
-      <section class="noticia">
-        <header class="noticia-cabecera">
-            <h2 class="noticia-titulo">Titulo</h2>
-            <div class="contenedor-social">
-                <button class="link-social-container">Tiktok</button>
-                <button class="link-social-container">Twitter</button>
-                <button class="link-social-container">Instagram</button>
-                <div class="link-social-container" ><a class="link-social" href="./noticia_imprimir.html">Imprimir</a></div>
-            </div>
-        </header>
-        <div class="noticia-contenido">
-            <p class="noticia-texto">
-                texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
-                texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
-            </p>
-            <img class="noticia-imagen">
-            <img class="noticia-imagen">
-        </div>
-      </section>
-    </main>
-
-    <footer class="pie">
-      <div class="pie-enlaces">
-        <a href="#">Identificacion</a>
-        <a href="#">Web ayuntamiento</a>
-        <a href="#">Aviso legal</a>
-      </div>
-      <div class="copyright">(c) Copyright</div>
-    </footer>
+<!-- Panel lateral -->
+<aside class="panel-comentarios" id="panelComentarios">
+  <div class="panel-header">
+    <h2>Comentarios del municipio</h2>
+    <button class="cerrar-panel" id="cerrarPanel">Cerrar</button>
   </div>
-  <script src="../js/comentarios.js"></script>
-</body>
-</html>
+
+  <div class="panel-contenido">
+    <div class="barra-superior-comentarios">
+      <div class="contador" id="contadorComentarios">Comentarios (0)</div>
+      <button class="btn-nuevo" id="btnNuevoComentario">Comentario nuevo</button>
+    </div>
+
+    <div class="formulario-comentario" id="formularioComentario">
+      <h3>Nuevo comentario</h3>
+
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" />
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" />
+
+      <label for="textoComentario">Texto del comentario</label>
+      <textarea id="textoComentario"></textarea>
+
+      <div class="fila-botones">
+        <button class="btn-enviar" id="enviarComentario">Enviar</button>
+        <button class="cerrar-formulario" id="cerrarFormulario">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="lista-comentarios" id="listaComentarios"></div>
+  </div>
+</aside>
+
+<script src="../../../js/comentarios.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<header class="noticia-cabecera">
+    <h2 class="noticia-titulo">{{title}}</h2>
+    <div class="contenedor-social">
+        <button class="link-social-container">Tiktok</button>
+        <button class="link-social-container">Twitter</button>
+        <button class="link-social-container">Instagram</button>
+        <div class="link-social-container" ><a class="link-social" href="./noticia_imprimir/{{id}}">Imprimir</a></div>
+    </div>
+</header>
+<div class="noticia-contenido">
+    <p class="noticia-texto">
+        {{content}}
+    </p>
+
+    {% for image in images %}
+        <img class="noticia-imagen" src="{{image}}" alt="Imagen de la noticia">
+    {% endfor %}
+</div>
+
+
+{% endblock %}

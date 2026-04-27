@@ -74,6 +74,13 @@
     min-height: 420px;
 }
 
+.seccion-titulo {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .menu-lateral {
     width: 140px;
     border: 1px solid #999;
@@ -128,7 +135,7 @@
   margin-bottom: 8px;
 }
 
-.tarjeta .titulo {
+.tarjeta {
   display: block;
   width: 100%;
   border: 1px solid #999;
@@ -136,6 +143,15 @@
   text-align: center;
   background: #fafafa;
   font-size: 1.2rem;
+}
+
+.titulo {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 

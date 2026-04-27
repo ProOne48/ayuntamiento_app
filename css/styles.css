@@ -10,6 +10,12 @@ body {
     padding: 30px;
 }
 
+.contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 button {
     border: 1px solid #b40b0b;
     border-radius: 0.5rem;

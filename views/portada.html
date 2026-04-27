@@ -1,86 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/portada.css"/>
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portada - Noticias</title>
-</head>
-<body>
-  <div class="contenedor">
-    <header class="cabecera">
-      <img class="logo" alt="Logo del Ayuntamiento de Granada" src="../img/logo.png"/>
-      <div class="nombre-sitio">Ayuntamiento de Granada</div>
-      <nav class="enlaces-superiores">
-        <ul>
-          <li><a href="#">Enlace 1</a></li>
-          <li><a href="#">Enlace 2</a></li>
-          <li><a href="#">Enlace 3</a></li>
-        </ul>
-      </nav>
-    </header>
+{% extends 'main.html' %}
 
-    <main class="principal">
-      <aside class="menu-lateral">
-        <ul>
-          <li><a href="#">menu1</a></li>
-          <li><a href="#">menu2</a></li>
-          <li><a href="#">menu3</a></li>
-        </ul>
-      </aside>
+{% block content %}
+    <h2 class="seccion-titulo">Noticias</h2>
 
-      <section class="noticias">
+    <section class="noticias">
+      {% for noticia in noticias %}
         <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
+          <a href="./noticia/{{ noticia.id }}">
+            <img class="noticia-imagen" src="{{ noticia.image_url }}" alt="{{ noticia.title }}"/>
+          </a>
+          <span class="titulo">{{ noticia.title }}</span>
         </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-        <article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article><article class="tarjeta">
-          <img src="https://via.placeholder.com/150" alt="Noticia">
-          <span class="titulo">titulo</span>
-        </article>
-      </section>
-    </main>
+      {% endfor %}
+    </section>
+      
+{% endblock %}
 
-    <footer class="pie">
-      <div class="pie-enlaces">
-        <a href="#">Identificacion</a>
-        <a href="#">Web ayuntamiento</a>
-        <a href="#">Aviso legal</a>
-      </div>
-      <div class="copyright">(c) Copyright</div>
-    </footer>
-  </div>
-</body>
-</html>

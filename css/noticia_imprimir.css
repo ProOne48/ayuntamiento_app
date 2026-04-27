@@ -123,6 +123,10 @@
     justify-content: space-between;
 }
 
+.noticia-imagen {
+    filter: grayscale();
+}
+
 .contenedor-social {
     display: flex;
     gap: 1.5rem;

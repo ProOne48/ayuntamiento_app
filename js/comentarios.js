@@ -1,38 +1,9 @@
-const comentarios = [
-  {
-    autor: "María Gómez",
-    email: "maria@email.com",
-    fecha: "17/03/2026",
-    hora: "12:15",
-    texto: "Me parece una buena iniciativa para que los vecinos estemos informados de todo lo que ocurre en el municipio."
-  },
-  {
-    autor: "Juan Pérez",
-    email: "juan@email.com",
-    fecha: "17/03/2026",
-    hora: "10:42",
-    texto: "Sería interesante añadir también fotos de los eventos y un calendario con las próximas actividades."
-  },
-  {
-    autor: "Lucía Fernández",
-    email: "lucia@email.com",
-    fecha: "17/03/2026",
-    hora: "08:03",
-    texto: "He asistido al último evento cultural y estuvo muy bien organizado. Ojalá se repita pronto."
-  }
-];
+const BASE_URL = "http://localhost:8080/php/index.php";
+// Obtener el ID de la noticia desde la URL limpia
+const noticiaId = window.location.pathname.split("/").pop();
+const comentarios = [];
 
-const localidades = [
-  "PELIGROS",
-  "ARMILLA",
-  "MARACENA",
-  "HUETOR VEGA",
-  "MOTRIL",
-  "LA ZUBIA",
-  "BAZA",
-  "GUADIX",
-  "SANTA FE"
-]
+const localidadesPromise = fetch(BASE_URL + "/get_municipios").then(response => response.json());
 
 const panel = document.getElementById("panelComentarios");
 const zonaHover = document.getElementById("zonaHover");
@@ -47,6 +18,13 @@ const contadorComentarios = document.getElementById("contadorComentarios");
 const inputNombre = document.getElementById("nombre");
 const inputEmail = document.getElementById("email");
 const inputTexto = document.getElementById("textoComentario");
+
+fetch(BASE_URL + "/get_comentarios/" + noticiaId).then(async response => {
+  response_data = await response.json()  
+  response_data.forEach(comentario => {
+    comentarios.push(comentario);
+  })
+}).then(() => renderizarComentarios());
 
 function abrirPanel() {
   panel.classList.add("abierto");
@@ -81,23 +59,24 @@ function actualizarContador() {
 function crearHTMLComentario(comentario) {
   const article = document.createElement("article");
   article.className = "comentario";
+  const [fecha, hora] = comentario.created_at ? comentario.created_at.split(" ") : [comentario.fecha, comentario.hora]
 
   article.innerHTML = `
     <div class="meta">
       <div class="autor-contenedor">
-        <span class="autor">${comentario.autor}</span>
+        <span class="autor">${comentario.username}</span>
         <span class="autor">${comentario.email}</span>
       </div>
-      <div>${comentario.fecha} - ${comentario.hora}</div>
+      <div>${fecha} - ${hora}</div>
     </div>
-    <div class="texto">${comentario.texto}</div>
+    <div class="texto">${comentario.content}</div>
   `;
 
   return article;
 }
 
 function renderizarComentarios() {
-  listaComentarios.innerHTML = "";
+  listaComentarios.innerHTML = ""; 
 
   comentarios.forEach((comentario) => {
     listaComentarios.appendChild(crearHTMLComentario(comentario));
@@ -163,10 +142,9 @@ enviarComentario.addEventListener("click", () => {
   const fechaHora = obtenerFechaHoraActual();
 
   const nuevoComentario = {
-    autor: nombre,
+    username: nombre,
     email: email,
-    fecha: fechaHora.fecha,
-    hora: fechaHora.hora,
+    created_at: fechaHora.fecha + " " + fechaHora.hora,
     texto: texto
   };
 
@@ -175,18 +153,21 @@ enviarComentario.addEventListener("click", () => {
   ocultarFormulario();
 });
 
-inputTexto.addEventListener("input", () => {
+inputTexto.addEventListener("input", async  () => {
+  const localidades = await localidadesPromise;
+  if(localidades && localidades.length === 0) return;
+
+  console.log(localidades);
+  
 
   localidades.forEach((localidad) => {
     const texto = inputTexto.value
 
-    const regex = new RegExp("\\b" + localidad + "\\b", "giu");
+    const regex = new RegExp("\\b" + localidad.name + "\\b", "giu");
     
     if(texto.match(regex)){
-      inputTexto.value = texto.replace(regex,  localidad)
+      inputTexto.value = texto.replace(regex,  localidad.name.toUpperCase());
     }    
   })
   
 })
-
-renderizarComentarios();

@@ -1,64 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/noticia_imprimir.css"/>
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portada - Noticias</title>
-</head>
-<body>
-  <div class="contenedor">
-    <header class="cabecera">
-      <img class="logo" alt="Logo del Ayuntamiento de Granada" src="../img/logo.png"/>
-      <div class="nombre-sitio">Ayuntamiento de Granada</div>
-      <nav class="enlaces-superiores">
-        <ul>
-          <li><a href="#">Enlace 1</a></li>
-          <li><a href="#">Enlace 2</a></li>
-          <li><a href="#">Enlace 3</a></li>
-        </ul>
-      </nav>
-    </header>
+{% extends 'main.html' %}
 
-    <main class="principal">
-      <aside class="menu-lateral hidden">
-        <ul>
-          <li><a href="#">menu1</a></li>
-          <li><a href="#">menu2</a></li>
-          <li><a href="#">menu3</a></li>
-        </ul>
-      </aside>
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../../css/noticia_imprimir.css"/>
+    <link rel="stylesheet" href="../../../css/styles.css"/>
+{% endblock %}
 
-      <section class="noticia">
-        <header class="noticia-cabecera">
-            <h2 class="noticia-titulo">Titulo</h2>
-            <div class="contenedor-social">
-                <button class="link-social hidden">Tiktok</button>
-                <button class="link-social hidden">Twitter</button>
-                <button class="link-social hidden">Instagram</button>
-                <button class="link-social hidden">Imprimir</button>
-            </div>
-        </header>
-        <div class="noticia-contenido">
-            <p class="noticia-texto">
-                texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
-                texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
-            </p>
-            <img class="noticia-imagen">
-            <img class="noticia-imagen">
-        </div>
-      </section>
-    </main>
+{% block title %}
+    <title>{{title}} - Ayuntamiento de Granada</title>
+{% endblock %}
 
-    <footer class="pie">
-      <div class="pie-enlaces">
-        <a href="#">Identificacion</a>
-        <a href="#">Web ayuntamiento</a>
-        <a href="#">Aviso legal</a>
-      </div>
-      <div class="copyright">(c) Copyright</div>
-    </footer>
-  </div>
-</body>
-</html>
+{% block logo %}
+    <img class="logo" alt="Logo del Ayuntamiento de Granada" src="../../../img/logo.png"/>
+{% endblock %}
+
+{% block content %}
+<header class="noticia-cabecera">
+    <h2 class="noticia-titulo">{{title}}</h2>
+    
+</header>
+<div class="noticia-contenido">
+    <p class="noticia-texto">
+        {{content}}
+    </p>
+    {% for image in images %}
+        <img class="noticia-imagen" src="{{image}}" alt="Imagen de la noticia">
+    {% endfor %}
+</div>
+
+
+{% endblock %}
